@@ -16,5 +16,34 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
         }
+
+        private void equiposBindingNavigatorSaveItem_Click(object sender, EventArgs e)
+        {
+            this.Validate();
+            this.equiposBindingSource.EndEdit();
+            this.tableAdapterManager.UpdateAll(this.admin_proyectosDataSet);
+
+        }
+
+        private void Form_administrar_proyectos_Load(object sender, EventArgs e)
+        {
+            // TODO: esta línea de código carga datos en la tabla 'admin_proyectosDataSet.proyectos' Puede moverla o quitarla según sea necesario.
+            this.proyectosTableAdapter.Fill(this.admin_proyectosDataSet.proyectos);
+            // TODO: esta línea de código carga datos en la tabla 'admin_proyectosDataSet.equipos' Puede moverla o quitarla según sea necesario.
+            this.equiposTableAdapter.Fill(this.admin_proyectosDataSet.equipos);
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_regresar_Click(object sender, EventArgs e)
+        {
+            Form_menu menu_principal = new Form_menu();
+            menu_principal.Show();
+            this.Hide();
+        }
     }
 }

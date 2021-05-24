@@ -21,6 +21,7 @@ namespace WindowsFormsApp1
         {
             Form_admin_equipos menu_administrar_equipos = new Form_admin_equipos();
             menu_administrar_equipos.Show();
+            this.Hide();
         }
 
         private void lbl_ir_avance_tareas_Click(object sender, EventArgs e)
@@ -43,6 +44,7 @@ namespace WindowsFormsApp1
         {
             Form_administrar_proyectos menu_administrar_proyectos = new Form_administrar_proyectos();
             menu_administrar_proyectos.Show();
+            this.Hide();
         }
     }
 }

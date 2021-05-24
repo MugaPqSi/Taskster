@@ -29,19 +29,28 @@ namespace WindowsFormsApp1
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lbl_proyectos = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.lbl_equipo = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.admin_proyectosDataSet = new WindowsFormsApp1.admin_proyectosDataSet();
+            this.equiposBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.equiposTableAdapter = new WindowsFormsApp1.admin_proyectosDataSetTableAdapters.equiposTableAdapter();
+            this.tableAdapterManager = new WindowsFormsApp1.admin_proyectosDataSetTableAdapters.TableAdapterManager();
+            this.proyectosBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.proyectosTableAdapter = new WindowsFormsApp1.admin_proyectosDataSetTableAdapters.proyectosTableAdapter();
+            this.btn_regresar = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.admin_proyectosDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.equiposBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.proyectosBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // lbl_proyectos
             // 
             this.lbl_proyectos.AutoSize = true;
-            this.lbl_proyectos.Location = new System.Drawing.Point(25, 29);
+            this.lbl_proyectos.Location = new System.Drawing.Point(63, 56);
             this.lbl_proyectos.Name = "lbl_proyectos";
             this.lbl_proyectos.Size = new System.Drawing.Size(94, 17);
             this.lbl_proyectos.TabIndex = 0;
@@ -49,11 +58,14 @@ namespace WindowsFormsApp1
             // 
             // comboBox1
             // 
+            this.comboBox1.DataSource = this.proyectosBindingSource;
+            this.comboBox1.DisplayMember = "nombre";
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(144, 26);
+            this.comboBox1.Location = new System.Drawing.Point(163, 53);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(411, 24);
             this.comboBox1.TabIndex = 1;
+            this.comboBox1.ValueMember = "id_proyecto";
             // 
             // lbl_equipo
             // 
@@ -67,7 +79,7 @@ namespace WindowsFormsApp1
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(25, 109);
+            this.label1.Location = new System.Drawing.Point(63, 102);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(62, 17);
             this.label1.TabIndex = 4;
@@ -76,47 +88,61 @@ namespace WindowsFormsApp1
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(28, 313);
+            this.label2.Location = new System.Drawing.Point(63, 279);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(63, 17);
             this.label2.TabIndex = 5;
             this.label2.Text = "TAREAS";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
-            // tableLayoutPanel1
+            // admin_proyectosDataSet
             // 
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(28, 130);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1042, 136);
-            this.tableLayoutPanel1.TabIndex = 6;
+            this.admin_proyectosDataSet.DataSetName = "admin_proyectosDataSet";
+            this.admin_proyectosDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // tableLayoutPanel2
+            // equiposBindingSource
             // 
-            this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(28, 342);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 3;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1042, 132);
-            this.tableLayoutPanel2.TabIndex = 7;
+            this.equiposBindingSource.DataMember = "equipos";
+            this.equiposBindingSource.DataSource = this.admin_proyectosDataSet;
+            // 
+            // equiposTableAdapter
+            // 
+            this.equiposTableAdapter.ClearBeforeFill = true;
+            // 
+            // tableAdapterManager
+            // 
+            this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
+            this.tableAdapterManager.categoriasTableAdapter = null;
+            this.tableAdapterManager.equiposTableAdapter = this.equiposTableAdapter;
+            this.tableAdapterManager.proyectosTableAdapter = this.proyectosTableAdapter;
+            this.tableAdapterManager.tipos_proyectosTableAdapter = null;
+            this.tableAdapterManager.UpdateOrder = WindowsFormsApp1.admin_proyectosDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
+            // 
+            // proyectosBindingSource
+            // 
+            this.proyectosBindingSource.DataMember = "proyectos";
+            this.proyectosBindingSource.DataSource = this.admin_proyectosDataSet;
+            // 
+            // proyectosTableAdapter
+            // 
+            this.proyectosTableAdapter.ClearBeforeFill = true;
+            // 
+            // btn_regresar
+            // 
+            this.btn_regresar.Location = new System.Drawing.Point(28, 12);
+            this.btn_regresar.Name = "btn_regresar";
+            this.btn_regresar.Size = new System.Drawing.Size(75, 26);
+            this.btn_regresar.TabIndex = 6;
+            this.btn_regresar.Text = "Regresar";
+            this.btn_regresar.UseVisualStyleBackColor = true;
+            this.btn_regresar.Click += new System.EventHandler(this.btn_regresar_Click);
             // 
             // Form_administrar_proyectos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1112, 499);
-            this.Controls.Add(this.tableLayoutPanel2);
-            this.Controls.Add(this.tableLayoutPanel1);
+            this.ClientSize = new System.Drawing.Size(1120, 499);
+            this.Controls.Add(this.btn_regresar);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lbl_equipo);
@@ -124,6 +150,10 @@ namespace WindowsFormsApp1
             this.Controls.Add(this.lbl_proyectos);
             this.Name = "Form_administrar_proyectos";
             this.Text = "Administrar_proyectos";
+            this.Load += new System.EventHandler(this.Form_administrar_proyectos_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.admin_proyectosDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.equiposBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.proyectosBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -136,7 +166,12 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Label lbl_equipo;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private admin_proyectosDataSet admin_proyectosDataSet;
+        private System.Windows.Forms.BindingSource equiposBindingSource;
+        private admin_proyectosDataSetTableAdapters.equiposTableAdapter equiposTableAdapter;
+        private admin_proyectosDataSetTableAdapters.TableAdapterManager tableAdapterManager;
+        private admin_proyectosDataSetTableAdapters.proyectosTableAdapter proyectosTableAdapter;
+        private System.Windows.Forms.BindingSource proyectosBindingSource;
+        private System.Windows.Forms.Button btn_regresar;
     }
 }

@@ -29,6 +29,7 @@ namespace WindowsFormsApp1
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lbl_nombre_equipo = new System.Windows.Forms.Label();
             this.lbl_categoria = new System.Windows.Forms.Label();
             this.lbl_descripcion = new System.Windows.Forms.Label();
@@ -36,6 +37,19 @@ namespace WindowsFormsApp1
             this.list_categoria = new System.Windows.Forms.ComboBox();
             this.text_descripcion = new System.Windows.Forms.RichTextBox();
             this.btn_crear_equipo = new System.Windows.Forms.Button();
+            this.admin_proyectosDataSet = new WindowsFormsApp1.admin_proyectosDataSet();
+            this.categoriasBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.categoriasTableAdapter = new WindowsFormsApp1.admin_proyectosDataSetTableAdapters.categoriasTableAdapter();
+            this.categoriasBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.admin_proyectosDataSet1 = new WindowsFormsApp1.admin_proyectosDataSet();
+            this.categoriasBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
+            this.categoriasBindingSource3 = new System.Windows.Forms.BindingSource(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.admin_proyectosDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.categoriasBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.categoriasBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.admin_proyectosDataSet1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.categoriasBindingSource2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.categoriasBindingSource3)).BeginInit();
             this.SuspendLayout();
             // 
             // lbl_nombre_equipo
@@ -74,11 +88,15 @@ namespace WindowsFormsApp1
             // 
             // list_categoria
             // 
+            this.list_categoria.DataBindings.Add(new System.Windows.Forms.Binding("SelectedItem", this.categoriasBindingSource, "nombre_categoria", true));
+            this.list_categoria.DataSource = this.categoriasBindingSource3;
+            this.list_categoria.DisplayMember = "nombre_categoria";
             this.list_categoria.FormattingEnabled = true;
             this.list_categoria.Location = new System.Drawing.Point(207, 105);
             this.list_categoria.Name = "list_categoria";
             this.list_categoria.Size = new System.Drawing.Size(261, 24);
             this.list_categoria.TabIndex = 4;
+            this.list_categoria.ValueMember = "id_categoria";
             // 
             // text_descripcion
             // 
@@ -96,12 +114,47 @@ namespace WindowsFormsApp1
             this.btn_crear_equipo.TabIndex = 6;
             this.btn_crear_equipo.Text = "Crear equipo";
             this.btn_crear_equipo.UseVisualStyleBackColor = true;
+            this.btn_crear_equipo.Click += new System.EventHandler(this.btn_crear_equipo_Click);
+            // 
+            // admin_proyectosDataSet
+            // 
+            this.admin_proyectosDataSet.DataSetName = "admin_proyectosDataSet";
+            this.admin_proyectosDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // categoriasBindingSource
+            // 
+            this.categoriasBindingSource.DataMember = "categorias";
+            this.categoriasBindingSource.DataSource = this.admin_proyectosDataSet;
+            // 
+            // categoriasTableAdapter
+            // 
+            this.categoriasTableAdapter.ClearBeforeFill = true;
+            // 
+            // categoriasBindingSource1
+            // 
+            this.categoriasBindingSource1.DataMember = "categorias";
+            this.categoriasBindingSource1.DataSource = this.admin_proyectosDataSet;
+            // 
+            // admin_proyectosDataSet1
+            // 
+            this.admin_proyectosDataSet1.DataSetName = "admin_proyectosDataSet";
+            this.admin_proyectosDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // categoriasBindingSource2
+            // 
+            this.categoriasBindingSource2.DataMember = "categorias";
+            this.categoriasBindingSource2.DataSource = this.admin_proyectosDataSet1;
+            // 
+            // categoriasBindingSource3
+            // 
+            this.categoriasBindingSource3.DataMember = "categorias";
+            this.categoriasBindingSource3.DataSource = this.admin_proyectosDataSet1;
             // 
             // Form_crear_equipo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(540, 386);
+            this.ClientSize = new System.Drawing.Size(524, 386);
             this.Controls.Add(this.btn_crear_equipo);
             this.Controls.Add(this.text_descripcion);
             this.Controls.Add(this.list_categoria);
@@ -111,6 +164,13 @@ namespace WindowsFormsApp1
             this.Controls.Add(this.lbl_nombre_equipo);
             this.Name = "Form_crear_equipo";
             this.Text = "crear_equipo";
+            this.Load += new System.EventHandler(this.Form_crear_equipo_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.admin_proyectosDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.categoriasBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.categoriasBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.admin_proyectosDataSet1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.categoriasBindingSource2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.categoriasBindingSource3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -125,5 +185,12 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.ComboBox list_categoria;
         private System.Windows.Forms.RichTextBox text_descripcion;
         private System.Windows.Forms.Button btn_crear_equipo;
+        private admin_proyectosDataSet admin_proyectosDataSet;
+        private System.Windows.Forms.BindingSource categoriasBindingSource;
+        private admin_proyectosDataSetTableAdapters.categoriasTableAdapter categoriasTableAdapter;
+        private System.Windows.Forms.BindingSource categoriasBindingSource1;
+        private admin_proyectosDataSet admin_proyectosDataSet1;
+        private System.Windows.Forms.BindingSource categoriasBindingSource2;
+        private System.Windows.Forms.BindingSource categoriasBindingSource3;
     }
 }
